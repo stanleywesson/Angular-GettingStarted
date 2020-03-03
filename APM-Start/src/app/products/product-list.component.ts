@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {IProduct} from './product';
+import { IProduct } from './product';
 
 @Component({
     selector: 'pm-products',
@@ -8,12 +8,22 @@ import {IProduct} from './product';
 })
 
 export class ProductListComponent
-implements OnInit {
+    implements OnInit {
     pageTitle: string = 'Product List';
     showImage: boolean = false;
-    listFilter: string = 'cart';
     imageWidth: number = 50;
     imageMargin: number = 2;
+
+    _listFilter: string;
+    get listFilter(): string {
+        return this._listFilter;
+    }    
+    set listFilter(value: string) {
+        this._listFilter = value;
+        this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
+    }
+
+    filteredProducts: IProduct[];
     products: IProduct[] =
         [
             {
@@ -24,7 +34,7 @@ implements OnInit {
                 "description": "Leaf rake with 48-inch wooden handle.",
                 "price": 19.95,
                 "starRating": 3.2,
-                 "imageUrl": "assets/images/leaf_rake.png"              
+                "imageUrl": "assets/images/leaf_rake.png"
             },
             {
                 "productId": 2,
@@ -68,11 +78,22 @@ implements OnInit {
             }
         ];
 
+    constructor() {
+        this.filteredProducts = this.products;
+        this.listFilter = 'cart';
+    }
+
+    performFilter(filterBy: string): IProduct[] {
+        filterBy = filterBy.toLowerCase();
+        return this.products.filter((product: IProduct) =>
+            product.productName.toLowerCase().indexOf(filterBy) !== -1);
+    }
+
     toggleImage(): void {
         this.showImage = !this.showImage;
     }
 
-    ngOnInit(): void{
+    ngOnInit(): void {
         console.log('Test OnInit');
     }
 }
