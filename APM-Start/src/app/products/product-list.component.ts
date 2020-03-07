@@ -14,6 +14,7 @@ export class ProductListComponent
     showImage: boolean = false;
     imageWidth: number = 50;
     imageMargin: number = 2;
+    errorMessage: string;
 
     _listFilter: string;
     get listFilter(): string {
@@ -28,7 +29,7 @@ export class ProductListComponent
     products: IProduct[] = [];
 
     constructor(private productService: ProductService) {
-      
+
     }
 
     performFilter(filterBy: string): IProduct[] {
@@ -42,8 +43,14 @@ export class ProductListComponent
     }
 
     ngOnInit(): void {
-        this.products = this.productService.GetProducts();
-        this.filteredProducts = this.products;
+        this.productService.GetProducts()
+            .subscribe({
+                next: data => {
+                    this.products = data;
+                    this.filteredProducts = this.products;
+                },
+                error: err => this.errorMessage = err
+            });
     }
 
     onRatingClicked(message: string): void {
