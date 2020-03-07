@@ -17,7 +17,7 @@ export class ProductListComponent
     _listFilter: string;
     get listFilter(): string {
         return this._listFilter;
-    }    
+    }
     set listFilter(value: string) {
         this._listFilter = value;
         this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
@@ -80,7 +80,6 @@ export class ProductListComponent
 
     constructor() {
         this.filteredProducts = this.products;
-        this.listFilter = 'cart';
     }
 
     performFilter(filterBy: string): IProduct[] {
@@ -95,5 +94,9 @@ export class ProductListComponent
 
     ngOnInit(): void {
         console.log('Test OnInit');
+    }
+
+    onRatingClicked(message: string): void {
+        this.pageTitle = 'Product List' + message;
     }
 }
