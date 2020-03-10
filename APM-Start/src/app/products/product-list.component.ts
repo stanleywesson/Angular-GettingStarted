@@ -27,9 +27,7 @@ export class ProductListComponent
     filteredProducts: IProduct[];
     products: IProduct[] = [];
 
-    constructor(private productService: ProductService) {
-
-    }
+    constructor(private productService: ProductService) { }
 
     performFilter(filterBy: string): IProduct[] {
         filterBy = filterBy.toLowerCase();
