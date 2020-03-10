@@ -1,7 +1,37 @@
 <div calss='card'
      *ngIf='product'>
     <div class='card-header'>
-        {{pageTitle + ': ' + product.productName}}
+        Product {{product.productName}}
+    </div>
+    <div>
+        <table class='table'>
+            <thead>
+                <th style="width: 150px;">Field</th>
+                <th>Description</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Code</td>
+                    <td>{{product.productCode | lowercase | convertToSpaces: '-' }}</td>
+                </tr>
+                <tr>
+                    <td>Release Date</td>
+                    <td>{{product.releaseDate}}</td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>{{product.productName}}</td>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td>{{product.price | currency: 'ZAR':'R':'1.2-2'}}</td>
+                </tr>
+                <tr>
+                    <td>Rating</td>
+                    <td><pm-star [rating]='product.starRating'></pm-star></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <div class='card-footer'>
         <button class="btn btn-outline-secondary"

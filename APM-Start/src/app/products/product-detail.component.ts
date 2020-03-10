@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from './product';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ProductService } from './product.service';
+import { stringify } from 'querystring';
 
 @Component({
   //selector: 'pm-product-detail',
@@ -8,26 +10,22 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
-  pageTitle: string = 'Product Details';
   product: IProduct;
 
   constructor(private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private productService: ProductService) { }
 
   ngOnInit() {
-    let id = +this.route.snapshot.paramMap.get('id');// + is 'n shortcut om string na numeric id te cast.
-    this.pageTitle += `: ${id}`;
+    let productId = +this.route.snapshot.paramMap.get('id');// + is 'n shortcut om 'n string na 'n numeric id te cast.
+    this.GetProduct(productId);
+  }
 
-    this.product = {
-      'productId': id,
-      'productName': 'Leaf Rake',
-      'productCode': 'test',
-      'releaseDate': 'test',
-      'description': 'test',
-      'price': 1,
-      'starRating': 1.5,
-      'imageUrl': 'test'
-    };
+  GetProduct(id: number): void {
+    this.productService.GetProduct(id).subscribe({
+      next: product => this.product = product,
+      error: err => console.log(err)
+    });
   }
 
   onBack(): void {
