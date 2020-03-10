@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from './product';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   //selector: 'pm-product-detail',
@@ -11,8 +11,8 @@ export class ProductDetailComponent implements OnInit {
   pageTitle: string = 'Product Details';
   product: IProduct;
 
-  constructor(private route: ActivatedRoute) {
-  }
+  constructor(private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
     let id = +this.route.snapshot.paramMap.get('id');// + is 'n shortcut om string na numeric id te cast.
@@ -30,8 +30,7 @@ export class ProductDetailComponent implements OnInit {
     };
   }
 
-  onBack() : void {
-    
+  onBack(): void {
+    this.router.navigate(['/products']);
   }
-
 }
