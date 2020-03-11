@@ -13,6 +13,10 @@
                 <tr>
                     <td>Code</td>
                     <td>{{product.productCode | lowercase | convertToSpaces: '-' }}</td>
+                    <td rowspan="5">
+                        <img [src]='product.imageUrl'
+                             [title]='product.productName'>
+                    </td>
                 </tr>
                 <tr>
                     <td>Release Date</td>
@@ -28,7 +32,9 @@
                 </tr>
                 <tr>
                     <td>Rating</td>
-                    <td><pm-star [rating]='product.starRating'></pm-star></td>
+                    <td>
+                        <pm-star [rating]='product.starRating'></pm-star>
+                    </td>
                 </tr>
             </tbody>
         </table>

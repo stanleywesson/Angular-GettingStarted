@@ -1,0 +1,15 @@
+thead{
+    color: #337AB7
+}
+
+img { 
+    width: 200px;
+    height: 200px; 
+    margin: 2px; 
+}
+
+.myBorder{
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+}

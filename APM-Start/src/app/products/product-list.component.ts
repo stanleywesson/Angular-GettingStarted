@@ -21,17 +21,16 @@ export class ProductListComponent
     }
     set listFilter(value: string) {
         this._listFilter = value;
-        this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
+        this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.productService.products;
     }
 
     filteredProducts: IProduct[];
-    products: IProduct[] = [];
 
     constructor(private productService: ProductService) { }
 
     performFilter(filterBy: string): IProduct[] {
         filterBy = filterBy.toLowerCase();
-        return this.products.filter((product: IProduct) =>
+        return this.productService.products.filter((product: IProduct) =>
             product.productName.toLowerCase().indexOf(filterBy) !== -1);
     }
 
@@ -43,8 +42,8 @@ export class ProductListComponent
         this.productService.GetProducts()
             .subscribe({
                 next: data => {
-                    this.products = data;
-                    this.filteredProducts = this.products;
+                    this.productService.products = data;
+                    this.filteredProducts = this.productService.products;
                 },
                 error: err => this.errorMessage = err
             });

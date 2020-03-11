@@ -5,7 +5,6 @@ import { ProductService } from './product.service';
 import { stringify } from 'querystring';
 
 @Component({
-  //selector: 'pm-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css']
 })
@@ -24,7 +23,7 @@ export class ProductDetailComponent implements OnInit {
   GetProduct(id: number) {
     this.product = this.productService.GetProduct(id);
   }
-  
+
   onBack(): void {
     this.router.navigate(['/products']);
   }
