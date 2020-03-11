@@ -10,21 +10,18 @@ import { tap, catchError, map } from 'rxjs/operators';
 
 export class ProductService {
     private productsUrl = 'api/products/products.json';
+    products: IProduct[];
 
     constructor(private http: HttpClient) { }
 
-    // TODO I don't like that I call all the products for the 1 screen from the back end, and to get a single item, I again call the back end
-    // Why cannot I search for the value in memory?
-    GetProduct(id: number): Observable<IProduct | undefined> {
-        return this.GetProducts()
-            .pipe(
-                map((products: IProduct[]) => products.find(p => p.productId === id))
-            );
+    GetProduct(id: number): IProduct {
+        return this.products.find(x => x.productId == id);
     }
 
     GetProducts(): Observable<IProduct[]> {
         return this.http.get<IProduct[]>(this.productsUrl)
             .pipe(
+                tap(x => this.products = x),
                 catchError(this.handleError)
             );
     }

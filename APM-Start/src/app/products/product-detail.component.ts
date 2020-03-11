@@ -21,13 +21,10 @@ export class ProductDetailComponent implements OnInit {
     this.GetProduct(productId);
   }
 
-  GetProduct(id: number): void {
-    this.productService.GetProduct(id).subscribe({
-      next: product => this.product = product,
-      error: err => console.log(err)
-    });
+  GetProduct(id: number) {
+    this.product = this.productService.GetProduct(id);
   }
-
+  
   onBack(): void {
     this.router.navigate(['/products']);
   }
