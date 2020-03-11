@@ -11,27 +11,28 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Code</td>
-                    <td>{{product.productCode | lowercase | convertToSpaces: '-' }}</td>
+                    <td>Product</td>
+                    <td>{{product.productName}}</td>
+
                     <td rowspan="5">
                         <img [src]='product.imageUrl'
                              [title]='product.productName'>
                     </td>
                 </tr>
                 <tr>
-                    <td>Release Date</td>
-                    <td>{{product.releaseDate}}</td>
+                    <td>Code</td>
+                    <td>{{product.productCode | lowercase | convertToSpaces: '-' }}</td>                    
                 </tr>
                 <tr>
-                    <td>Name</td>
-                    <td>{{product.productName}}</td>
-                </tr>
+                    <td>Available</td>
+                    <td>{{product.releaseDate}}</td>
+                </tr>                
                 <tr>
                     <td>Price</td>
                     <td>{{product.price | currency: 'ZAR':'R':'1.2-2'}}</td>
                 </tr>
                 <tr>
-                    <td>Rating</td>
+                    <td>5 Star Rating</td>
                     <td>
                         <pm-star [rating]='product.starRating'></pm-star>
                     </td>
